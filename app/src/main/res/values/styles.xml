@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="dishHeader">
+        <item name="android:fontFamily">@font/belgrano</item>
+        <item name="android:textColor">@color/oishii_red</item>
+        <item name="android:textSize">@dimen/dishHeader</item>
+    </style>
+
+    <style name="descriptionStyle">
+        <item name="android:fontFamily">@font/average</item>
+        <item name="android:textSize">@dimen/underText</item>
+        <item name="android:textColor"> @color/oishii_red</item>
+    </style>
+
+    <style name="alergies">
+        <item name="android:fontFamily">@font/average</item>
+        <item name="android:textSize">@dimen/underText</item>
+        <item name="android:textColor">@color/oishii_blue</item>
+    </style>
+
+    <style name="prestigeSideView">
+        <item name="android:fontFamily">@font/prestigeelitestd</item>
+        <item name="android:textColor">@color/oishii_red</item>
+        <item name="android:textSize">@dimen/header_size</item>
+    </style>
+
+
+
+
+
+
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/oishii_navigation"
+    app:startDestination="@id/oishii_welcome">
+    <fragment
+        android:id="@+id/oishii_welcome"
+        android:name="com.example.oishii.welcome.Oishii_welcome_Fragment"
+        android:label="fragment_oishii_welcome"
+        tools:layout="@layout/fragment_oishii_welcome" >
+        <action
+            android:id="@+id/action_oishii_welcome_to_menu2"
+            app:destination="@id/menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/menu"
+        android:name="com.example.oishii.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menu_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.example.oishii.CheckoutFragment"
+        android:label="CheckoutFragment"
+        tools:layout="@layout/fragment_checkout"/>
+</navigation>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_size">32sp</dimen>
+    <dimen name="dishHeader">24sp</dimen>
+    <dimen name="underText">12sp</dimen>
+
+    <dimen name="low_Spacing">8dp</dimen>
+    <dimen name="lowIsh_Spacing">16dp</dimen>
+    <dimen name="medium_Spacing">32dp</dimen>
+    <dimen name="large_Spacing">48dp</dimen>
+    <dimen name="huge_Spacing">64dp</dimen>
+</resources>
