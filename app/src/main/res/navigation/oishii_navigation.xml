@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
-        android:name="com.example.oishii.CheckoutFragment"
+        android:name="com.example.oishii.checkout.CheckoutFragment"
         android:label="CheckoutFragment"
         tools:layout="@layout/fragment_checkout"/>
 </navigation>

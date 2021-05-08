@@ -1,6 +1,7 @@
-package com.example.oishii
+package com.example.oishii.database
 
 import androidx.room.*
+import com.example.oishii.DishObject
 
 @Dao
 interface OishiiDAO {

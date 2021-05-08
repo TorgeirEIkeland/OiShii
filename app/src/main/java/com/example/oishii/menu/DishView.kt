@@ -1,23 +1,20 @@
-package com.example.oishii
+package com.example.oishii.menu
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.example.oishii.*
+import com.example.oishii.database.OishiiDAO
 
-class DishView(context: Context) : ConstraintLayout(context), SendInfo{
+class DishView(context: Context) : ConstraintLayout(context) {
 
     private var dishTitle: TextView
     private var descrition: TextView
     private var alergies: TextView
     private var price: TextView
     private var textButton: TextView
-    lateinit var menuViewModel: MenuViewModel
 
 
     init {
@@ -49,9 +46,5 @@ class DishView(context: Context) : ConstraintLayout(context), SendInfo{
         textButton.setOnClickListener{
             callback(dish)
         }
-    }
-
-    override fun insert(dao: OishiiDAO, dish: DishObject) {
-        TODO("Not yet implemented")
     }
 }

@@ -12,8 +12,10 @@ import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.oishii.*
+import com.example.oishii.database.AppDatabase
+import com.example.oishii.database.OishiiDAO
 
-class MenuFragment : Fragment(), SendInfo {
+class MenuFragment : Fragment() {
 
     var customAdapter: MenuCardAdapter? = null
     lateinit var recyclerView: RecyclerView
@@ -141,9 +143,4 @@ class MenuFragment : Fragment(), SendInfo {
         )
 
     }
-
-    override fun insert(dao: OishiiDAO, dish: DishObject) {
-        menuViewModel.insertItem(dao, dish)
-    }
-
 }

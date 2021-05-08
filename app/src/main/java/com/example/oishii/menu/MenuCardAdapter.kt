@@ -1,4 +1,4 @@
-package com.example.oishii
+package com.example.oishii.menu
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.oishii.menu.MenuCardObject
+import com.example.oishii.DishObject
+import com.example.oishii.R
 
 
 class MenuCardAdapter(var dataSet: List<MenuCardObject>, var context: Context, var callback: (DishObject) -> Unit) :
