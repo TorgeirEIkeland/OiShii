@@ -16,7 +16,7 @@ class CheckoutView(context: Context): ConstraintLayout(context) {
         val view = LayoutInflater.from(context).inflate(R.layout.checkout_view, this)
 
         checkoutDishTextView = view.findViewById(R.id.checkout_dish_textView)
-        priceTextView = view.findViewById(R.id.checkout_dish_textView)
+        priceTextView = view.findViewById(R.id.checkout_price_textView)
     }
 
     fun setText(item: DishObject){

@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.oishii.DishObject
+import com.example.oishii.MainActivity
 import com.example.oishii.R
 import com.example.oishii.database.AppDatabase
 import com.example.oishii.menu.DishView
@@ -26,8 +27,10 @@ class CheckoutFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_checkout, container, false)
         // Inflate the layout for this fragment
 
@@ -44,34 +47,35 @@ class CheckoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         fillCheckout()
+
     }
 
-    fun fillCheckout(){
+    fun fillCheckout() {
         var oishiiDB = AppDatabase.getDatabase(requireContext()).OishiiDAO()
-        var itemList=  mutableListOf<DishObject>()
-        checkoutViewModel.getAllItems(oishiiDB){
+        var itemList = mutableListOf<DishObject>()
 
-            tryThis(it)
+
+        checkoutViewModel.getAllItems(oishiiDB) {
+
+
+            activity?.runOnUiThread {
+                checkoutLL.removeAllViews()
+
+                for (item in it) {
+                    val itemView = CheckoutView(requireContext())
+                    itemView.setText(item)
+
+                    checkoutLL.addView(itemView)
+                }
+            }
 
         }
+
 
         //Loops trough list of dishes to make new views in the cards
 
-    }
-
-    fun tryThis(it: List<DishObject>){
-        checkoutLL.removeAllViews()
-
-        for (item in it) {
-            val itemView = CheckoutView(requireContext())
-            itemView.setText(item)
-
-            checkoutLL.addView(itemView)
-
-            itemView.requestLayout()
-
-        }
     }
 
 }
