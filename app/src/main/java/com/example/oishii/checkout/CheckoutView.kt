@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.oishii.DishObject
+import com.example.oishii.database.DishObject
 import com.example.oishii.R
 
 class CheckoutView(context: Context): ConstraintLayout(context) {
@@ -23,4 +23,6 @@ class CheckoutView(context: Context): ConstraintLayout(context) {
         checkoutDishTextView.text = item.dishName
         priceTextView.text = item.price.toString()
     }
+
+
 }

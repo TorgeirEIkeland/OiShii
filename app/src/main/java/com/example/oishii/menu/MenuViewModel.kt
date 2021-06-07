@@ -2,7 +2,7 @@ package com.example.oishii.menu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.oishii.DishObject
+import com.example.oishii.database.DishObject
 import com.example.oishii.database.OishiiDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

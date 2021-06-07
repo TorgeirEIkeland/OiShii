@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.oishii.DishObject
+import com.example.oishii.database.DishObject
 import com.example.oishii.R
 
 

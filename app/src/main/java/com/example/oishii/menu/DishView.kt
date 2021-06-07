@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.example.oishii.*
-import com.example.oishii.database.OishiiDAO
+import com.example.oishii.database.DishObject
 
 class DishView(context: Context) : ConstraintLayout(context) {
 

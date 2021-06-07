@@ -1,6 +1,5 @@
 package com.example.oishii.checkout
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,19 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.oishii.DishObject
 import com.example.oishii.MainActivity
+import com.example.oishii.database.DishObject
 import com.example.oishii.R
 import com.example.oishii.database.AppDatabase
-import com.example.oishii.menu.DishView
-import com.example.oishii.menu.MenuViewModel
+import java.util.concurrent.Executor
 
 class CheckoutFragment : Fragment() {
 
     lateinit var checkoutLL: LinearLayout
     lateinit var paybutton: TextView
     lateinit var checkoutViewModel: CheckoutViewModel
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +53,8 @@ class CheckoutFragment : Fragment() {
 
 
         fillCheckout()
+        biometricStuff()
+        checkoutButton()
 
     }
 
@@ -72,10 +78,48 @@ class CheckoutFragment : Fragment() {
             }
 
         }
-
-
-        //Loops trough list of dishes to make new views in the cards
-
     }
 
+        fun checkoutButton(){
+            paybutton.setOnClickListener {
+                biometricPrompt.authenticate(promptInfo)
+            }
+        }
+
+        fun biometricStuff(){
+            executor = ContextCompat.getMainExecutor(context)
+            biometricPrompt = BiometricPrompt(this, executor,
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(errorCode: Int,
+                                                       errString: CharSequence) {
+                        super.onAuthenticationError(errorCode, errString)
+                        Toast.makeText(context,
+                            "Canceled", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+                    override fun onAuthenticationSucceeded(
+                        result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
+                        Toast.makeText(context,
+                            "Authentication succeeded!", Toast.LENGTH_SHORT)
+                            .show()
+
+                        (activity as MainActivity).notificationManager.sendNotification("paid", "du har betalt")
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        Toast.makeText(context, "Authentication failed",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+
+            promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for my app")
+                .setSubtitle("Log in using your biometric credential")
+                .setNegativeButtonText("Cancel")
+                .build()
+        }
 }

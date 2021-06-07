@@ -1,7 +1,6 @@
 package com.example.oishii.database
 
 import androidx.room.*
-import com.example.oishii.DishObject
 
 @Dao
 interface OishiiDAO {
@@ -11,7 +10,7 @@ interface OishiiDAO {
     @Update
     fun updateItem(item: DishObject)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(item: DishObject)
 
     @Query("SELECT * FROM Cart")

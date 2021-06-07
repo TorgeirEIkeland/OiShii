@@ -1,4 +1,4 @@
-package com.example.oishii
+package com.example.oishii.database
 
 import androidx.lifecycle.viewModelScope
 import androidx.room.ColumnInfo
@@ -15,6 +15,7 @@ class DishObject(
     val price: Int?,
     var amount: Int?
 ) {
+    fun isTheSame(dish: DishObject): Boolean {
+        return (dish.dishName == dishName)
+    }
 }
-
-

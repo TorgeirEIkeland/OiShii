@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.oishii.*
 import com.example.oishii.database.AppDatabase
-import com.example.oishii.database.OishiiDAO
+import com.example.oishii.database.DishObject
 
 class MenuFragment : Fragment() {
 
@@ -72,9 +72,18 @@ class MenuFragment : Fragment() {
     private fun initRecyclerView() {
         customAdapter = MenuCardAdapter(
             getMenuList(), requireContext()
-        ) {
+        ) { dish ->
             var oishiiDB = AppDatabase.getDatabase(requireContext()).OishiiDAO()
-            menuViewModel.insertItem(oishiiDB, it)
+            menuViewModel.getCart(oishiiDB){ list ->
+
+                var check = list.none{item ->
+                    item.isTheSame(dish)
+                }
+
+                if(check){
+                    menuViewModel.insertItem(oishiiDB, dish)
+                }
+            }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = customAdapter

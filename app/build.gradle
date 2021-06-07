@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.oishii"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -44,6 +44,11 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+
+    //Biometric scan thingy
+    implementation"androidx.biometric:biometric:1.2.0-alpha03"
+
+
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
