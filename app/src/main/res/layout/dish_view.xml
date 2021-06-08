@@ -13,7 +13,7 @@
         style="@style/dishHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        tools:text="Dish Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         style="@style/descriptionStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        tools:text="description"
         app:layout_constraintEnd_toStartOf="@+id/price_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dish_name_textView" />
@@ -32,7 +32,7 @@
         style="@style/alergies"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        tools:text="alergens"
         app:layout_constraintEnd_toStartOf="@+id/price_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description_textView" />
@@ -42,7 +42,7 @@
         style="@style/dishHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="70kr"
+        tools:text="21kr"
         app:layout_constraintBottom_toBottomOf="@id/description_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/description_textView" />

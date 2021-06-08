@@ -15,4 +15,22 @@ class CheckoutViewModel: ViewModel() {
             callback(cartList)
         }
     }
+
+    fun updateDatabase(dao: OishiiDAO, item: DishObject){
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.updateItem(item)
+        }
+    }
+
+    fun removeFromDatabase(dao: OishiiDAO, item: DishObject){
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.deleteItem(item)
+        }
+    }
+
+    fun deleteAllFromDatabase(dao: OishiiDAO){
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.deleteAll()
+        }
+    }
 }

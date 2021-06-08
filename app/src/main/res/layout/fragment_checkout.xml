@@ -18,19 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        //Wierd fix but it works for vertical textView
-
+        <!--Wierd fix but it works for vertical textView -->
         <TextView
             android:id="@+id/checkout_textView"
             style="@style/prestigeSideView"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/lowIsh_Spacing"
+            android:layout_marginStart="@dimen/lowIsh_Spacing"
             android:layout_marginTop="160dp"
             android:gravity="end"
             android:rotation="-90"
-            android:text="Checkout"
+            android:text="@string/checkout"
             android:textAlignment="viewEnd"
             app:layout_constraintEnd_toStartOf="@id/line"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +38,7 @@
             android:id="@+id/line"
             android:layout_width="1dp"
             android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/large_Spacing"
+            android:layout_marginStart="@dimen/large_Spacing"
             android:layout_marginTop="@dimen/lowIsh_Spacing"
             android:layout_marginBottom="@dimen/lowIsh_Spacing"
             android:background="@color/oishii_dark_pink"
@@ -53,9 +51,9 @@
             android:id="@+id/checkout_LL"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/low_Spacing"
+            android:layout_marginStart="@dimen/low_Spacing"
             android:layout_marginTop="@dimen/lowIsh_Spacing"
-            android:layout_marginRight="@dimen/lowIsh_Spacing"
+            android:layout_marginEnd="@dimen/lowIsh_Spacing"
             android:layout_marginBottom="@dimen/lowIsh_Spacing"
             android:divider="@color/transperant"
             android:orientation="vertical"
@@ -82,16 +80,14 @@
         app:layout_constraintEnd_toStartOf="@id/checkout_card"
         app:layout_constraintStart_toStartOf="@id/checkout_card"
         app:layout_constraintTop_toTopOf="@id/checkout_card"
-        app:srcCompat="@drawable/oishii_5"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="167dp" />
+        app:srcCompat="@drawable/oishii_5" />
 
     <TextView
         android:id="@+id/pay_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Pay now"
+        android:text="@string/betal"
         android:textColor="@color/black"
         android:textSize="@dimen/header_size"
         app:layout_constraintEnd_toEndOf="@id/checkout_card"

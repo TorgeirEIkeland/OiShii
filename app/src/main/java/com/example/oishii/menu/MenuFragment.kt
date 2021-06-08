@@ -99,13 +99,13 @@ class MenuFragment : Fragment() {
                         "Fresh ramen noodles, tofu, scallionsm shitake mushrooms, leeks, bamboo shots, pak choi in spicy dobanjiang soup.",
                         "allergens: hvete, soya, sesam nøtter",
                         70,
-                        null
+                        1
                     ), DishObject(
                         "spicy vegan ramen",
                         "Fresh ramen noodles, tofu, scallions, shitake mushrooms, leeks, bamboo shoots, pak choi in spicy dobanjian soup.",
                         "allergens: hvete, soya, sesam nøtter",
                         70,
-                        null
+                        1
                     )
                 )
             ), MenuCardObject(
@@ -116,13 +116,13 @@ class MenuFragment : Fragment() {
                         "Rice noodle sticks with tofu, bean sprouts and Chinese chives in chilli sauce. Topped with cashew and lime.",
                         "allergens: nøtter, soya",
                         70,
-                        null
+                        1
                     ), DishObject(
                         "vegan teriyaki noodles",
                         "Wheat noodles woked with tofu, pak choi, bell peppers, red onions and broccoli in teriyaki",
                         "allergens: hvete soya",
                         70,
-                        null
+                        1
                     )
                 )
             ), MenuCardObject(
@@ -133,19 +133,19 @@ class MenuFragment : Fragment() {
                         null,
                         null,
                         30,
-                        null
+                        1
                     ), DishObject(
                         "coffe",
                         null,
                         null,
                         20,
-                        null
+                        1
                     ), DishObject(
                         "soda",
                         "Coca-cola \n Coca-cola zero \n sparkling water",
                         null,
                         35,
-                        null
+                        1
                     )
                 )
             )

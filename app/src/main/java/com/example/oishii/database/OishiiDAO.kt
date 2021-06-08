@@ -7,6 +7,9 @@ interface OishiiDAO {
     @Delete
     fun deleteItem(item: DishObject)
 
+    @Query("DELETE FROM Cart")
+    fun deleteAll()
+
     @Update
     fun updateItem(item: DishObject)
 
@@ -15,4 +18,6 @@ interface OishiiDAO {
 
     @Query("SELECT * FROM Cart")
     fun getCart() : List<DishObject>
+
+
 }

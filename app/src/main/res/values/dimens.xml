@@ -2,6 +2,7 @@
 <resources>
     <dimen name="header_size">32sp</dimen>
     <dimen name="dishHeader">24sp</dimen>
+    <dimen name="checkoutSize">16sp</dimen>
     <dimen name="underText">12sp</dimen>
 
     <dimen name="low_Spacing">8dp</dimen>

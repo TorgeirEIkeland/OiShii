@@ -10,26 +10,49 @@
 
     <TextView
         android:id="@+id/checkout_dish_textView"
-        style="@style/dishHeader"
+        style="@style/CheckoutDish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/lowIsh_Spacing"/>
+        tools:text="dish name" />
 
     <TextView
         android:id="@+id/checkout_price_textView"
         style="@style/dishHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="70kr"
-        app:layout_constraintBottom_toBottomOf="@id/checkout_dish_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/checkout_dish_textView" />
+        app:layout_constraintTop_toTopOf="@id/checkout_dish_textView"
+        tools:text="420kr" />
 
+    <TextView
+        android:id="@+id/minusButton"
+        style="@style/dishPlusMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        app:layout_constraintStart_toStartOf="@id/checkout_dish_textView"
+        app:layout_constraintTop_toBottomOf="@id/checkout_dish_textView" />
 
+    <TextView
+        android:id="@+id/amountTextView"
+        style="@style/dishPlusMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/minusButton"
+        app:layout_constraintTop_toTopOf="@id/minusButton"
+        tools:text="69" />
+
+    <TextView
+        android:id="@+id/plusButton"
+        style="@style/dishPlusMinus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintStart_toEndOf="@id/amountTextView"
+        app:layout_constraintTop_toTopOf="@id/amountTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
