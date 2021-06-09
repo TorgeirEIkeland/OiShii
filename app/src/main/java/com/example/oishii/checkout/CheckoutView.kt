@@ -2,13 +2,10 @@ package com.example.oishii.checkout
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.oishii.database.DishObject
 import com.example.oishii.R
-import com.example.oishii.database.AppDatabase
 
 class CheckoutView(context: Context) : ConstraintLayout(context) {
 
@@ -17,7 +14,7 @@ class CheckoutView(context: Context) : ConstraintLayout(context) {
     var plusButton: TextView
     var minusButton: TextView
     var amountTextView: TextView
-    lateinit var thisItem: DishObject
+    lateinit var currentItem: DishObject
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.checkout_view, this)
@@ -30,41 +27,41 @@ class CheckoutView(context: Context) : ConstraintLayout(context) {
     }
 
     fun setText(item: DishObject, callback: (DishObject, String) -> Unit) {
-        thisItem = item
-        checkoutDishTextView.text = thisItem.dishName
+        currentItem = item
+        checkoutDishTextView.text = currentItem.dishName
 
         updateTextViews()
-        buttons(callback)
-    }
-
-    fun buttons(callback: (DishObject, String) -> Unit) {
-        minusButton.setOnClickListener {
-            thisItem.amount = thisItem.amount - 1
-
-            if (thisItem.amount <= 0) {
-                callback(thisItem, "remove")
-            } else {
-                updateTextViews()
-                callback(thisItem, "update")
-            }
-
-        }
-
-        plusButton.setOnClickListener {
-            thisItem.amount = thisItem.amount + 1
-
-            updateTextViews()
-            callback(thisItem, "update")
-        }
+        clickListners(callback)
     }
 
     fun updateTextViews() {
-        amountTextView.text = thisItem.amount.toString()
+        amountTextView.text = currentItem.amount.toString()
 
-        val price = thisItem.price * thisItem.amount
+        val price = currentItem.price * currentItem.amount
         priceTextView.text = price.toString()
-
     }
+
+    fun clickListners(callback: (DishObject, String) -> Unit) {
+        var itemAmount = currentItem.amount
+
+        minusButton.setOnClickListener {
+            itemAmount -= 1
+            if (itemAmount <= 0) {
+                callback(currentItem, "remove")
+            } else {
+                updateTextViews()
+                callback(currentItem, "update")
+            }
+        }
+
+        plusButton.setOnClickListener {
+            itemAmount += 1
+            updateTextViews()
+            callback(currentItem, "update")
+        }
+    }
+
+
 
 
 

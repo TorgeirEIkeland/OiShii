@@ -21,7 +21,7 @@
 
         <!-- Weird fix but it works for vertical textView -->
         <TextView
-            android:id="@+id/dishName_textView"
+            android:id="@+id/side_textView"
             style="@style/prestigeSideView"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 
 
         <LinearLayout
-            android:id="@+id/menu_LL"
+            android:id="@+id/oishii_LL"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/low_Spacing"

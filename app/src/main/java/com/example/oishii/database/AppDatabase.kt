@@ -5,12 +5,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [DishObject::class], version = 1)
+@Database(entities = [DishObject::class, ReceiptObject::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
+
+    abstract fun ReceiptDAO(): ReceiptDAO
+
     abstract fun OishiiDAO(): OishiiDAO
+
+
     companion object{
         @Volatile
         private var INSTANCE: AppDatabase? = null
+
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -18,6 +24,7 @@ abstract class AppDatabase: RoomDatabase() {
                     AppDatabase::class.java,
                     "app_database"
                 ).build()
+
                 INSTANCE = instance
                 instance
             }

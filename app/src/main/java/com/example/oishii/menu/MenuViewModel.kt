@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 class MenuViewModel : ViewModel() {
     fun getCart(dao: OishiiDAO, callBack: (List<DishObject>) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val list = dao.getCart()
+            val list = dao.getCartFromDB()
             callBack(list)
         }
     }
 
     fun insertItem(dao: OishiiDAO, dish: DishObject){
         viewModelScope.launch(Dispatchers.IO){
-            dao.insertItem(dish)
+            dao.insertItemToDB(dish)
         }
     }
 }

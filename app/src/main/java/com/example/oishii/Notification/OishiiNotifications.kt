@@ -18,9 +18,9 @@ class OishiiNotifications(val context: Context) {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         createNotificationChannel(
-            "asd",
-            "Oishii fuuuuuu",
-            "Notification desc"
+            "order placed",
+            "Oishii Notification",
+            "Order placed notification"
         )
     }
 
@@ -41,8 +41,8 @@ class OishiiNotifications(val context: Context) {
     }
 
     fun sendNotification(title: String, content: String){
-        val notificationID = 101
-        val channelID = "asd"
+        val notificationID = 420
+        val channelID = "order placed"
 
         val notification = Notification.Builder(context,
             channelID)
@@ -55,7 +55,4 @@ class OishiiNotifications(val context: Context) {
         notificationManager?.notify(notificationID, notification)
 
     }
-
-
-
 }

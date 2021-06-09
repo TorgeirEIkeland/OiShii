@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -21,7 +22,7 @@ class MenuFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var checkoutButton: ImageView
     lateinit var menuViewModel: MenuViewModel
-
+    lateinit var receiptButton: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,50 +38,32 @@ class MenuFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
         menuViewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
 
+        receiptButton = view.findViewById(R.id.receipt_textButton)
         recyclerView = view.findViewById(R.id.recyclerView)
         checkoutButton = view.findViewById(R.id.checkout_button)
-
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecyclerView()
-
-        setOnClickListners()
-
+        clickListners()
     }
 
-    fun setOnClickListners() {
-
-        val options = navOptions {
-            anim {
-                enter = R.anim.fragment_fade_enter
-                exit = R.anim.fragment_fade_exit
-                popEnter = R.anim.fragment_fade_enter
-                popExit = R.anim.fragment_fade_exit
-            }
-        }
-
-        checkoutButton.setOnClickListener {
-            findNavController().navigate(R.id.checkoutFragment, null, options)
-        }
-
-
-    }
-
+    //Creating recycler view and possibility to add items to database
     private fun initRecyclerView() {
         customAdapter = MenuCardAdapter(
             getMenuList(), requireContext()
         ) { dish ->
             var oishiiDB = AppDatabase.getDatabase(requireContext()).OishiiDAO()
-            menuViewModel.getCart(oishiiDB){ list ->
+            menuViewModel.getCart(oishiiDB) { list ->
 
-                var check = list.none{item ->
+                var doesNotExist = list.none { item ->
                     item.isTheSame(dish)
                 }
 
-                if(check){
+                if (doesNotExist) {
                     menuViewModel.insertItem(oishiiDB, dish)
                 }
             }
@@ -89,6 +72,27 @@ class MenuFragment : Fragment() {
         recyclerView.adapter = customAdapter
     }
 
+    //adding small animation to fragment swap
+    fun clickListners() {
+        val options = navOptions {
+            anim {
+                enter = R.anim.nav_default_enter_anim
+                exit = R.anim.nav_default_exit_anim
+                popEnter = R.anim.nav_default_pop_enter_anim
+                popExit = R.anim.nav_default_pop_exit_anim
+            }
+        }
+
+        receiptButton.setOnClickListener {
+            findNavController().navigate(R.id.receiptFragment, null, options)
+        }
+
+        checkoutButton.setOnClickListener {
+            findNavController().navigate(R.id.checkoutFragment, null, options)
+        }
+    }
+
+    //list of items in the menu
     fun getMenuList(): List<MenuCardObject> {
         return listOf(
             MenuCardObject(

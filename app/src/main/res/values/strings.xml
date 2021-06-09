@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">OiShii</string>
     <string name="add_to_cart">add to cart</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="betal">Betal nå</string>
     <string name="logginn">Logg inn</string>
     <string name="checkout">Checkout</string>
+    <string name="kviteringer">Kviteringer</string>
+
 </resources>

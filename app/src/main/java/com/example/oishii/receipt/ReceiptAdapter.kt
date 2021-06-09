@@ -1,4 +1,4 @@
-package com.example.oishii.menu
+package com.example.oishii.receipt
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.oishii.database.DishObject
 import com.example.oishii.R
+import com.example.oishii.database.DishObject
+import com.example.oishii.database.ReceiptObject
 
-
-class MenuCardAdapter(var dataSet: List<MenuCardObject>, var context: Context, var callback: (DishObject) -> Unit) :
-    RecyclerView.Adapter<MenuCardAdapter.ViewHolder>() {
+class ReceiptAdapter(var dataSet: List<ReceiptObject>, var context: Context):
+    RecyclerView.Adapter<ReceiptAdapter.ViewHolder>() {
 
     class ViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
         var dishType: TextView
@@ -24,24 +24,22 @@ class MenuCardAdapter(var dataSet: List<MenuCardObject>, var context: Context, v
         }
     }
 
+
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.oishii_card, viewGroup, false)
-        return ViewHolder(view)
+        return ReceiptAdapter.ViewHolder(view)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.dishType.text = dataSet[position].dishType
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int){
         viewHolder.linearLayout.removeAllViews()
 
         //Loops trough list of dishes to make new views in the cards
         for (dish in dataSet[position].dishList) {
-            val newDishView = DishView(context)
-            newDishView.setText(dish)
-            newDishView.addToCartButton(dish, callback)
+            val newDishView = ReceiptView(context)
+            newDishView.setView(dish)
 
             viewHolder.linearLayout.addView(newDishView)
             newDishView.requestLayout()
@@ -52,4 +50,9 @@ class MenuCardAdapter(var dataSet: List<MenuCardObject>, var context: Context, v
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
+    fun updateAdapter(newData: List<ReceiptObject>) {
+        dataSet = newData
+        notifyDataSetChanged()
+    }
 }

@@ -13,11 +13,8 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.oishii.MainActivity
-import com.example.oishii.database.DishObject
 import com.example.oishii.R
-import com.example.oishii.database.AppDatabase
-import com.example.oishii.database.OishiiDAO
-import org.w3c.dom.Text
+import com.example.oishii.database.*
 import java.util.concurrent.Executor
 
 class CheckoutFragment : Fragment() {
@@ -34,6 +31,8 @@ class CheckoutFragment : Fragment() {
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     lateinit var oishiiDB: OishiiDAO
+    lateinit var cartList: List<DishObject>
+    lateinit var receiptDB: ReceiptDAO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +45,12 @@ class CheckoutFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_checkout, container, false)
         // Inflate the layout for this fragment
-
         checkoutViewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
-
 
         checkoutLL = view.findViewById(R.id.checkout_LL)
         paybutton = view.findViewById(R.id.pay_button)
         oishiiDB = AppDatabase.getDatabase(requireContext()).OishiiDAO()
+        receiptDB = AppDatabase.getDatabase(requireContext()).ReceiptDAO()
 
         return view
     }
@@ -61,22 +59,25 @@ class CheckoutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        fillCheckout()
-        biometricStuff()
+        setViews()
         checkoutButton()
-
+        fingerprintSettup()
     }
 
-    fun fillCheckout() {
-        checkoutViewModel.getAllItems(oishiiDB) {
+    //Creating x amount of views == to database list
+    //Updating items in database if amount has changed
+    //if amount is set to 0 or less it gets removed from database
+    fun setViews() {
+        checkoutViewModel.getAllItems(oishiiDB) { dishList ->
             activity?.runOnUiThread {
+                cartList = dishList
+
                 checkoutLL.removeAllViews()
 
-                for (item in it) {
+                for (item in cartList) {
                     val itemView = CheckoutView(requireContext())
-                    itemView.setText(item) { item, text ->
-                        updateDB(item, text, itemView)
+                    itemView.setText(item) { item, task ->
+                        updateDB(item, task, itemView)
                     }
                     checkoutLL.addView(itemView)
                 }
@@ -84,23 +85,23 @@ class CheckoutFragment : Fragment() {
         }
     }
 
+    fun updateDB(item: DishObject, task: String, itemView: CheckoutView) {
+        if (task == "remove") {
+            checkoutViewModel.removeItem(oishiiDB, item)
+            checkoutLL.removeView(itemView)
+        } else {
+            checkoutViewModel.updateItem(oishiiDB, item)
+        }
+    }
+
+    //runs the biometric scan to check if user authentication passes and "buys" the items if passed
     fun checkoutButton() {
         paybutton.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
         }
     }
 
-    fun updateDB(item: DishObject, text: String, itemView: CheckoutView) {
-        if (text == "remove") {
-            checkoutViewModel.removeFromDatabase(oishiiDB, item)
-            checkoutLL.removeView(itemView)
-        } else {
-            checkoutViewModel.updateDatabase(oishiiDB, item)
-        }
-
-    }
-
-    fun biometricStuff() {
+    fun fingerprintSettup() {
         executor = ContextCompat.getMainExecutor(context)
         biometricPrompt = BiometricPrompt(this, executor,
             object : BiometricPrompt.AuthenticationCallback() {
@@ -117,6 +118,9 @@ class CheckoutFragment : Fragment() {
                     result: BiometricPrompt.AuthenticationResult
                 ) {
                     super.onAuthenticationSucceeded(result)
+                    checkoutViewModel.addToReceipts(receiptDB, ReceiptObject(cartList))
+                    checkoutViewModel.resetDatabase(oishiiDB)
+                    checkoutLL.removeAllViews()
 
                     Toast.makeText(
                         context,
@@ -127,8 +131,6 @@ class CheckoutFragment : Fragment() {
                         "paid",
                         "du har betalt"
                     )
-                    checkoutViewModel.deleteAllFromDatabase(oishiiDB)
-                    checkoutLL.removeAllViews()
                 }
 
                 override fun onAuthenticationFailed() {

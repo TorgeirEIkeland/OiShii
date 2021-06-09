@@ -1,23 +1,26 @@
 package com.example.oishii.database
 
+import android.content.SearchRecentSuggestionsProvider
 import androidx.room.*
+import java.lang.Exception
 
 @Dao
 interface OishiiDAO {
     @Delete
-    fun deleteItem(item: DishObject)
+    fun deleteItemFromDB(item: DishObject)
 
     @Query("DELETE FROM Cart")
     fun deleteAll()
 
     @Update
-    fun updateItem(item: DishObject)
+    fun updateItemInDB(item: DishObject)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertItem(item: DishObject)
+    fun insertItemToDB(item: DishObject)
 
     @Query("SELECT * FROM Cart")
-    fun getCart() : List<DishObject>
+    fun getCartFromDB() : List<DishObject>
+
 
 
 }

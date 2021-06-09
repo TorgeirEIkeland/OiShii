@@ -1,12 +1,9 @@
 package com.example.oishii.database
 
-import androidx.lifecycle.viewModelScope
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
+//table for checkoutFragment
 @Entity(tableName = "Cart")
 class DishObject(
     @PrimaryKey val dishName: String,
